@@ -4,6 +4,7 @@ import MapView from 'react-native-maps';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import axios from 'axios'
 
 export default function HomeScreen() {
 
@@ -19,9 +20,20 @@ export default function HomeScreen() {
 				errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
 			}));
 		} else {
-			this._getLocationAsync();
+			_getLocationAsync();
 		}
 	}, [])
+
+	const getBusLocation = async ()=>{
+		const response = await axios.get('https://www.sistemas.dftrans.df.gov.br/gps/linha/932.1/geo/recent')
+		setState(s=>({...s, bus: response.data.features}))
+		// state.bus.map(bus=>console.log(`Latitude: ${bus.geometry[1]} | Longitude: ${bus.geometry[0]}`))
+		state.bus.map(bus=>console.log(`Location: ${JSON.stringify(bus.geometry)}`))
+	}
+
+	useEffect(()=>{
+		setInterval(() => { getBusLocation() }, 1000)
+	},[])
 
 	_getLocationAsync = async () => {
 		let { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -40,7 +52,9 @@ export default function HomeScreen() {
 	return (
 		<View style={styles.container}>
 			<MapView style={styles.mapStyle}>
-				<MapView.Marker coordinate={{latitude: -14.25219935, longitude: -47.30287048}} />
+				{
+					state.bus && state.bus.map(bus=><MapView.Marker pinColor={'#F00'} coordinate={{latitude: bus.geometry.coordinates[1], longitude: bus.geometry.coordinates[0]}} />)
+				}
 			</MapView>
 		</View>
 	);
