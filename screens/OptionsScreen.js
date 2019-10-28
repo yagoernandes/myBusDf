@@ -19,11 +19,15 @@ export default function OptionsScreen() {
   ;[text, setText] = useState('')
   ;[modalVisible, setModalVisible] = useState(false)
   ;[modalSelected, setModalSelected] = useState({})
-  ;[linhas, setLinhas] = useState([])
+  ;[linhas, setLinhasArray] = useState([])
 
   useEffect(() => {
     _retrieveData()
   }, [])
+
+  useEffect(() => {
+    console.log('LINHAS: ', linhas)
+  }, [linhas])
 
   const _storeData = async data => {
     try {
@@ -42,8 +46,12 @@ export default function OptionsScreen() {
         for (linha in linhasStored) {
           const temp = await AsyncStorage.getItem(linhasStored[linha])
           linhasToAdd.push(JSON.parse(temp))
+          console.log(
+            `Linha index [${linha}] valor [${linhasStored[linha]}] adicionada!`
+          )
         }
-        setLinhas(linhasToAdd)
+        console.log('Novo array de linhas: ', linhasToAdd)
+        setLinhasArray(linhasToAdd)
       }
     } catch (error) {
       console.log('[ ERRO - Retrieving ]: ', error)
@@ -59,11 +67,10 @@ export default function OptionsScreen() {
   }
 
   const addLinha = () => {
-    console.log(linhas)
     _storeData({
       code: _formatText(text),
       color: '',
-      addeAt: Date.now()
+      addedAt: Date.now()
     })
     setText('')
   }
@@ -104,26 +111,28 @@ export default function OptionsScreen() {
       </View>
       <FlatList
         data={linhas}
-        renderItem={({ item }) => (
-          <View key={item.addedAt} style={styles.listItem}>
-            <Text style={{ flex: 1 }}>{item.code}</Text>
-            <Ionicons
-              name='md-color-palette'
-              size={26}
-              style={{ marginRight: 30 }}
-              color={item.color || '#555'}
-              onPress={selectItem(item)}
-            />
-            <Ionicons
-              name='md-close'
-              size={22}
-              onPress={removeItem(item)}
-              style={{ marginRight: 10 }}
-              color='#FCC'
-            />
-          </View>
-        )}
-        keyExtractor={item => item.addedAt}
+        renderItem={({ item }) => {
+          return (
+            <View key={item.addedAt} style={styles.listItem}>
+              <Text style={{ flex: 1 }}>{item.code}</Text>
+              <Ionicons
+                name='md-color-palette'
+                size={26}
+                style={{ marginRight: 30 }}
+                color={item.color || '#555'}
+                onPress={selectItem(item)}
+              />
+              <Ionicons
+                name='md-close'
+                size={22}
+                onPress={removeItem(item)}
+                style={{ marginRight: 10 }}
+                color='#FCC'
+              />
+            </View>
+          )
+        }}
+        keyExtractor={item => `${item.addedAt}`}
       />
       <Modal
         animationType='slide'

@@ -6,7 +6,12 @@
     "sdkVersion": "35.0.0",
     "platforms": ["ios", "android", "web"],
     "android": {
-      "package": "com.yagoernandes.mybusdf"
+      "package": "com.yagoernandes.mybusdf",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCtTxcTYHxCcTdtgYgdlWz-c6inohDedRg"
+        }
+      }
     },
     "version": "1.0.0",
     "orientation": "portrait",

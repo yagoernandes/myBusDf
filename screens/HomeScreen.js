@@ -30,6 +30,9 @@ export default function HomeScreen() {
         errorMessage:
           'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'
       }))
+      console.log(
+        'Oops, this will not work on Sketch in an Android emulator. Try it on your device!'
+      )
     } else {
       _getLocationAsync()
     }
@@ -74,8 +77,6 @@ export default function HomeScreen() {
   const getAllBusLocations = () => {
     const keysIndexes = Object.keys(linhas)
     for (linha in Object.keys(linhas)) {
-      console.log('get: ', keysIndexes[linha])
-      console.log('Linha to get: ', linhas[keysIndexes[linha]].code)
       getBusesLocation(linhas[keysIndexes[linha]].code)
     }
     makeBusesList()
@@ -109,6 +110,7 @@ export default function HomeScreen() {
     }
 
     let location = await Location.getCurrentPositionAsync({})
+    console.log('location: ', location)
     setState(s => ({ ...s, location }))
   }
 
@@ -146,6 +148,22 @@ export default function HomeScreen() {
             </MapView.Marker>
           )
         })}
+        {state.location && (
+          <MapView.Marker
+            key={'location'}
+            anchor={{ x: 0.5, y: 1 }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            coordinate={{
+              latitude: state.location.coords.latitude,
+              longitude: state.location.coords.longitude
+            }}>
+            <Ionicons name='md-pin' size={22} color={'#0390fc'} />
+          </MapView.Marker>
+        )}
       </MapView>
     </View>
   )
