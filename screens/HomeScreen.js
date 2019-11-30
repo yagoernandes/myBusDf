@@ -7,7 +7,8 @@ import {
   View,
   Dimensions
 } from 'react-native'
-import MapView from 'react-native-maps'
+import MapView from 'expo'
+// import MapView from 'react-native-maps'
 import Constants from 'expo-constants'
 import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'

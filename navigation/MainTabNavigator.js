@@ -1,60 +1,64 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from 'react'
+import { Platform } from 'react-native'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createStackNavigator } from 'react-navigation-stack'
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import OptionsScreen from '../screens/OptionsScreen';
+import TabBarIcon from '../components/TabBarIcon'
+import HomeScreen from '../screens/HomeScreen'
+import OptionsScreen from '../screens/OptionsScreen'
 
 const config = Platform.select({
-	web: { headerMode: 'screen' },
-	default: {},
-});
+  web: { headerMode: 'screen' },
+  default: {}
+})
 
 const HomeStack = createStackNavigator(
-	{
-		Home: HomeScreen,
-	},
-	config
-);
+  {
+    Home: HomeScreen
+  },
+  config
+)
 
 HomeStack.navigationOptions = {
-	tabBarLabel: 'Mapa',
-	tabBarIcon: ({ focused }) => (
-		<TabBarIcon
-			focused={focused}
-			name={
-				Platform.OS === 'ios'
-					? `ios-information-circle${focused ? '' : '-outline'}`
-					: 'md-information-circle'
-			}
-		/>
-	),
-};
+  tabBarLabel: 'Mapa',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  )
+}
 
-HomeStack.path = '';
+HomeStack.path = ''
 
 const OptionsStack = createStackNavigator(
-	{
-		Links: OptionsScreen,
-	},
-	config
-);
+  {
+    Links: OptionsScreen
+  },
+  config
+)
 
 OptionsStack.navigationOptions = {
-	tabBarLabel: 'Linhas',
-	tabBarIcon: ({ focused }) => (
-		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-	),
-};
+  tabBarLabel: 'Linhas',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  )
+}
 
-OptionsStack.path = '';
+OptionsStack.path = ''
 
 const tabNavigator = createBottomTabNavigator({
-	HomeStack,
-	OptionsStack,
-});
+  HomeStack,
+  OptionsStack
+})
 
-tabNavigator.path = '';
+tabNavigator.path = ''
 
-export default tabNavigator;
+export default tabNavigator
