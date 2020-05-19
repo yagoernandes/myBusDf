@@ -22,5 +22,5 @@
 
 > :bus: Aplicativo de localização de ônibus do Distrito Federal utilizando a API da Secretaria de Mobilidade Urbana (sem documentação).
 
-<p align="center"><img src=".github/home.jpg" max-height="400" width="auto"/></p>
-<p align="center"><img src=".github/linhas.jpg" max-height="400" width="auto"/></p>
+<p align="center"><img src=".github/images/home.jpg" max-height="400" width="auto"/></p>
+<p align="center"><img src=".github/images/linhas.jpg" max-height="400" width="auto"/></p>
