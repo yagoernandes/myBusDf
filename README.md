@@ -26,6 +26,12 @@
 
 <p align="center"><img src=".github/mybusdf.gif"/></p>
 
+# :pushpin: Table of Contents
+
+* [Features](#rocket-features)
+* [Instalação](#construction_worker-instalacao)
+* [FAQ](#postbox-faq)
+
 # :rocket: Features
 
 * Visualize a localização do seu ônibus em tempo real.
