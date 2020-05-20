@@ -5,7 +5,7 @@
 # :bus: MyBus DF 
 
 <p align="center">
-    <a href="https://github.com/yagoernandes">
+    <a href="https://www.linkedin.com/in/yagoernandes">
         <img src="https://img.shields.io/badge/Author-YagoErnandes-brightgreen" alt="Author" />
     </a>
     <a href="#">
@@ -61,6 +61,9 @@ yarn start
 - [Expo](https://expo.io/)
 - [Google Maps API](https://cloud.google.com/maps-platform?hl=pt-br)
 ##
+**É necessário alguma chave de API?**
+
+Sim, é necessária uma chave de API do Google Cloud Platform, crie uma válida e substitua em `app.json`
 
 
 ---
